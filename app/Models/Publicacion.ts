@@ -1,7 +1,13 @@
-import { BaseModel, column, hasMany, HasMany, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm';
+import { BaseModel, column, hasMany, HasMany, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm';
 import Comentario from './Comentario';
-import Multimedia from './Multimedia';
 import { DateTime } from 'luxon';
+import Entidad from './Entidad';
+
+enum categoria {
+  Noticia = 'Noticia',
+  Tratamiento = 'Tratamiento',
+  Padecimiento = 'Padecimiento',
+}
 
 export default class Publicacion extends BaseModel {
   @column({ isPrimary: true })
@@ -17,7 +23,7 @@ export default class Publicacion extends BaseModel {
   public fecha_publicacion: Date;
 
   @column()
-  public categoria: string;
+  public categoria: categoria;
 
   @column()
   public contenido: string;
@@ -25,17 +31,18 @@ export default class Publicacion extends BaseModel {
   @column()
   public etiquetas: string;
 
+  @column()
+  public id_entidad: number;
+
+  @hasOne(() => Entidad,{
+    foreignKey: 'id_entidad',
+  })
+  public entidad: HasOne<typeof Entidad>;
+
   @hasMany(() => Comentario, {
     foreignKey: 'id_publicacion',
   })
   public comentarios: HasMany<typeof Comentario>;
-
-  @manyToMany(() => Multimedia, {
-    pivotTable: 'entidades_multimedia',
-    pivotForeignKey: 'id_entidad',
-    pivotRelatedForeignKey: 'id_multimedia',
-  })
-  public multimedia: ManyToMany<typeof Multimedia>;
 
     @column.dateTime({ autoCreate: true })
     public createdAt: DateTime

@@ -1,6 +1,7 @@
-import { BaseModel, column, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm';
+import { BaseModel, column, HasOne, hasOne, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm';
 import Mapa from './Mapa';
 import { DateTime } from 'luxon';
+import Entidad from './Entidad';
 
 export default class Ubicacion extends BaseModel {
   @column({ isPrimary: true })
@@ -14,6 +15,15 @@ export default class Ubicacion extends BaseModel {
 
   @column()
   public nombre: string;
+
+  @column()
+  public id_entidad: number;
+
+  @hasOne(() => Entidad,{
+    foreignKey: 'id_entidad',
+  })
+  public entidad: HasOne<typeof Entidad>;
+
 
   @manyToMany(() => Mapa, {
     pivotTable: 'mapas_ubicaciones',

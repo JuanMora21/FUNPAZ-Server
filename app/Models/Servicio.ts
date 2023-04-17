@@ -1,8 +1,15 @@
 import { DateTime } from 'luxon';
-import { BaseModel, column, hasMany, HasMany, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm';
+import { BaseModel, column, hasMany, HasMany, HasOne, hasOne, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm';
 import Cita from './Cita';
 import Profesional from './Profesional';
-import Multimedia from './Multimedia';
+import Entidad from './Entidad';
+
+enum especialidad {
+  Psiquiatria = "Psiquiatria",
+  Psicologia = "Psicologia",
+  InternacionGeneral = "Internacion General",
+  InternacionEspecial = "Internacion Especial"
+}
 
 export default class Servicio extends BaseModel {
   @column({ isPrimary: true })
@@ -12,7 +19,7 @@ export default class Servicio extends BaseModel {
   public nombre: string;
 
   @column()
-  public especialidad: string;
+  public especialidad: especialidad;
 
   @column()
   public descripcion: string;
@@ -22,6 +29,14 @@ export default class Servicio extends BaseModel {
 
   @column()
   public tarifa_particular: number;
+
+  @column()
+  public id_entidad: number;
+
+  @hasOne(() => Entidad,{
+    foreignKey: 'id_entidad',
+  })
+  public entidad: HasOne<typeof Entidad>;
 
   @hasMany(() => Cita, {
     foreignKey: 'id_servicio',
@@ -34,13 +49,6 @@ export default class Servicio extends BaseModel {
     pivotRelatedForeignKey: 'id_servicio',
   })
   public profesionales: ManyToMany<typeof Profesional>;
-
-  @manyToMany(() => Multimedia, {
-    pivotTable: 'entidades_multimedia',
-    pivotForeignKey: 'id_entidad',
-    pivotRelatedForeignKey: 'id_multimedia',
-  })
-  public multimedia: ManyToMany<typeof Multimedia>;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;

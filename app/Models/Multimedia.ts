@@ -1,8 +1,32 @@
 import { BaseModel, column, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm';
-import Profesional from './Profesional';
-import Servicio from './Servicio';
-import Publicacion from './Publicacion';
 import { DateTime } from 'luxon';
+import Entidad from './Entidad';
+
+enum tipo {
+  Imagen = "Imagen",
+  Audio = "Audio",
+  Video = "Video",
+  Animacion = "Animacion",
+  Documento = "Documento"
+}
+
+enum formato {
+  JPEG = "JPEG",
+  PNG = "PNG",
+  BMP = "BMP",
+  MP3 = "MP3",
+  WAV = "WAV",
+  AAC = "AAC",
+  MP4 = "MP4",
+  AVI = "AVI",
+  MKV = "MKV",
+  MOV = "MOV",
+  GIF = "GIF",
+  SWF = "SWF",
+  DOC = "DOC",
+  PDF = "PDF",
+  TXT = "TXT"
+}
 
 export default class Multimedia extends BaseModel {
   @column({ isPrimary: true })
@@ -12,7 +36,10 @@ export default class Multimedia extends BaseModel {
   public nombre: string;
 
   @column()
-  public tipo: string;
+  public tipo: tipo;
+
+  @column()
+  public formato: formato;
 
   @column()
   public url: string;
@@ -20,26 +47,12 @@ export default class Multimedia extends BaseModel {
   @column()
   public descripcion: string;
 
-  @manyToMany(() => Profesional, {
+  @manyToMany(() => Entidad, {
     pivotTable: 'entidades_multimedia',
     pivotForeignKey: 'id_multimedia',
     pivotRelatedForeignKey: 'id_entidad',
   })
-  public profesionales: ManyToMany<typeof Profesional>;
-
-  @manyToMany(() => Servicio, {
-    pivotTable: 'entidades_multimedia',
-    pivotForeignKey: 'id_multimedia',
-    pivotRelatedForeignKey: 'id_entidad',
-  })
-  public servicios: ManyToMany<typeof Servicio>;
-
-  @manyToMany(() => Publicacion, {
-    pivotTable: 'entidades_multimedia',
-    pivotForeignKey: 'id_multimedia',
-    pivotRelatedForeignKey: 'id_entidad',
-  })
-  public publicaciones: ManyToMany<typeof Publicacion>;
+  public servicios: ManyToMany<typeof Entidad>;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

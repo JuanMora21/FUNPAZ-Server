@@ -1,6 +1,6 @@
-import { BaseModel, column, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm';
-import Permiso from './Permiso';
+import { BaseModel, column, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm';
 import { DateTime } from 'luxon';
+import Usuario from './Usuario';
 
 export default class Administrador extends BaseModel {
   @column({ isPrimary: true })
@@ -10,23 +10,15 @@ export default class Administrador extends BaseModel {
   public nombre: string;
 
   @column()
-  public correo_electronico: string;
-
-  @column()
   public telefono: string;
 
   @column()
-  public usuario: string;
+  public id_usuario: number;
 
-  @column()
-  public contrasena: string;
-
-  @manyToMany(() => Permiso, {
-    pivotTable: 'usuarios_permisos',
-    pivotForeignKey: 'id_usuario',
-    pivotRelatedForeignKey: 'id_permiso',
+  @hasOne(() => Usuario,{
+    foreignKey: 'id_usuario',
   })
-  public permisos: ManyToMany<typeof Permiso>;
+  public usuario: HasOne<typeof Usuario>;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

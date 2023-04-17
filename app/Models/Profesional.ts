@@ -1,9 +1,14 @@
-import { BaseModel, column, hasMany, HasMany, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm';
+import { BaseModel, column, hasMany, HasMany, HasOne, hasOne, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm';
 import Cita from './Cita';
 import Servicio from './Servicio';
-import Multimedia from './Multimedia';
-import Permiso from './Permiso';
 import { DateTime } from 'luxon';
+import Usuario from './Usuario';
+import Entidad from './Entidad';
+
+enum especialidad {
+  Psiquiatria = "Psiquiatria",
+  Psicologia = "Psicologia",
+}
 
 export default class Profesional extends BaseModel {
   @column({ isPrimary: true })
@@ -13,7 +18,7 @@ export default class Profesional extends BaseModel {
   public nombre: string;
 
   @column()
-  public especialidad: string;
+  public especialidad: especialidad;
 
   @column()
   public horario: string;
@@ -22,7 +27,20 @@ export default class Profesional extends BaseModel {
   public telefono: string;
 
   @column()
-  public correo_electronico: string;
+  public id_usuario: number;
+
+  @column()
+  public id_entidad: number;
+
+  @hasOne(() => Entidad,{
+    foreignKey: 'id_entidad',
+  })
+  public entidad: HasOne<typeof Entidad>;
+
+  @hasOne(() => Usuario,{
+    foreignKey: 'id_usuario',
+  })
+  public usuario: HasOne<typeof Usuario>;
 
   @hasMany(() => Cita, {
     foreignKey: 'id_profesional',
@@ -35,20 +53,6 @@ export default class Profesional extends BaseModel {
     pivotRelatedForeignKey: 'id_servicio',
   })
   public servicios: ManyToMany<typeof Servicio>;
-
-  @manyToMany(() => Multimedia, {
-    pivotTable: 'entidades_multimedia',
-    pivotForeignKey: 'id_entidad',
-    pivotRelatedForeignKey: 'id_multimedia',
-  })
-  public multimedia: ManyToMany<typeof Multimedia>;
-
-  @manyToMany(() => Permiso, {
-    pivotTable: 'usuarios_permisos',
-    pivotForeignKey: 'id_usuario',
-    pivotRelatedForeignKey: 'id_permiso',
-  })
-  public permisos: ManyToMany<typeof Permiso>;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;

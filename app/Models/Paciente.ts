@@ -1,17 +1,38 @@
-import { BaseModel, column, hasMany, HasMany, manyToMany, ManyToMany, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm';
+import { BaseModel, column, hasMany, HasMany, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm';
 import Cita from './Cita';
 import Comentario from './Comentario';
 import Testimonio from './Testimonio';
-import Permiso from './Permiso';
 import EPS from './Eps';
 import { DateTime } from 'luxon';
+import Usuario from './Usuario';
+
+enum tipoIdentificacion {
+  CC = 'C.C',
+  TI = 'T.I',
+  CE = 'C.E',
+  Pasaporte = 'Pasaporte'
+}
+
+enum genero {
+  Masculino = 'Masculino',
+  Femenino = 'Femenino',
+  Otro = 'Otro'
+}
+
+enum estadoCivil {
+  Soltero = 'Solter@',
+  Casado = 'Casad@',
+  UnionLibre = 'Union Libre',
+  Divorciado = 'Divorciad@',
+  Viudo = 'Viud@'
+}
 
 export default class Paciente extends BaseModel {
   @column({ isPrimary: true })
   public numero_identificacion: string;
 
   @column()
-  public tipo_identificacion: string;
+  public tipo_identificacion: tipoIdentificacion;
 
   @column()
   public nombre: string;
@@ -20,13 +41,13 @@ export default class Paciente extends BaseModel {
   public fecha_nacimiento: Date;
 
   @column()
-  public genero: string;
+  public genero: genero;
 
   @column()
-  public estado_civil: string;
+  public estado_civil: estadoCivil;
 
   @column()
-  public id_EPS: number;
+  public id_eps: number;
 
   @column()
   public direccion: string;
@@ -35,13 +56,15 @@ export default class Paciente extends BaseModel {
   public telefono: string;
 
   @column()
-  public correo_electronico: string;
+  public id_usuario: number;
 
-  @column()
-  public historial_medico: string;
+  @hasOne(() => Usuario,{
+    foreignKey: 'id_usuario',
+  })
+  public usuario: HasOne<typeof Usuario>;
 
   @hasOne(() => EPS, {
-    foreignKey: 'id_EPS',
+    foreignKey: 'id_eps',
   })
   public eps: HasOne<typeof EPS>;
 
@@ -59,13 +82,6 @@ export default class Paciente extends BaseModel {
     foreignKey: 'id_paciente',
   })
   public testimonios: HasMany<typeof Testimonio>;
-
-  @manyToMany(() => Permiso, {
-    pivotTable: 'usuarios_permisos',
-    pivotForeignKey: 'id_usuario',
-    pivotRelatedForeignKey: 'id_permiso',
-  })
-  public permisos: ManyToMany<typeof Permiso>;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;

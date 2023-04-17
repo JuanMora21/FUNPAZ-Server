@@ -1,9 +1,6 @@
 import { BaseModel, column, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm';
-import Administrador from './Administrador';
-import GestorContenido from './GestorContenido';
-import Paciente from './Paciente';
-import Profesional from './Profesional';
 import { DateTime } from 'luxon';
+import Usuario from './Usuario';
 
 export default class Permiso extends BaseModel {
   @column({ isPrimary: true })
@@ -15,33 +12,12 @@ export default class Permiso extends BaseModel {
   @column()
   public metodo: string;
 
-  @manyToMany(() => Administrador, {
+  @manyToMany(() => Usuario, {
     pivotTable: 'usuarios_permisos',
     pivotForeignKey: 'id_permiso',
     pivotRelatedForeignKey: 'id_usuario',
   })
-  public administradores: ManyToMany<typeof Administrador>;
-
-  @manyToMany(() => GestorContenido, {
-    pivotTable: 'usuarios_permisos',
-    pivotForeignKey: 'id_permiso',
-    pivotRelatedForeignKey: 'id_usuario',
-  })
-  public gestoresContenido: ManyToMany<typeof GestorContenido>;
-
-  @manyToMany(() => Paciente, {
-    pivotTable: 'usuarios_permisos',
-    pivotForeignKey: 'id_permiso',
-    pivotRelatedForeignKey: 'id_usuario',
-  })
-  public pacientes: ManyToMany<typeof Paciente>;
-
-  @manyToMany(() => Profesional, {
-    pivotTable: 'usuarios_permisos',
-    pivotForeignKey: 'id_permiso',
-    pivotRelatedForeignKey: 'id_usuario',
-  })
-  public profesionales: ManyToMany<typeof Profesional>;
+  public Usuarios: ManyToMany<typeof Usuario>;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

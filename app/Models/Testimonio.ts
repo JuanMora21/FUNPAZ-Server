@@ -10,7 +10,7 @@ export default class Testimonio extends BaseModel {
   public id_paciente: number;
 
   @column()
-  public fecha_publicacion: DateTime;
+  public fecha_publicacion: Date;
 
   @column()
   public contenido: string;
