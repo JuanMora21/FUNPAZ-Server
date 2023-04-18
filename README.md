@@ -21,26 +21,25 @@ Este repositorio contiene el código fuente del servidor de backend para la clí
 
 1. Clonar el repositorio:
 
-  git clone https://github.com/yourusername/FUNPAZ-Mental-Health-Clinic.git
+  `git clone https://github.com/yourusername/FUNPAZ-Mental-Health-Clinic.git`
   
 2. Entrar en el directorio del proyecto:
 
-  cd FUNPAZ-Mental-Health-Clinic
+  `cd FUNPAZ-Mental-Health-Clinic`
   
 
 3. Instalar las dependencias del proyecto:
 
-  npm install
+  `npm install`
 
 4. Configurar las variables de entorno y la conexión de la base de datos en el archivo `.env`.
 
 5. Ejecutar las migraciones de la base de datos:
 
-  adonis migration:run
+  `adonis migration:run`
 
 6. Iniciar el servidor:
-
-  adonis serve --dev
+  `adonis serve --dev`
 
 El servidor de backend de la clínica de salud mental FUNPAZ ahora debería estar en funcionamiento.
 
