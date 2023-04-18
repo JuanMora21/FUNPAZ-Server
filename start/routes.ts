@@ -23,3 +23,31 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.get('/', async () => {
   return { hello: 'world' }
 })
+
+
+//Roles del sistema
+import './routes/Administradores'
+import './routes/GestoresContenidos'
+import './routes/Profesionales'
+import './routes/Pacientes'
+import './routes/Usuarios'
+import './routes/Permisos'
+import './routes/UsuariosPermisos'
+import './routes/ProfesionalesServicios'
+
+
+//Entidades del sistema
+import './routes/Eps'
+import './routes/Citas'
+import './routes/Comentarios'
+import './routes/Testimonios'
+import './routes/Servicios'
+import './routes/Publicaciones'
+import './routes/Multimedias'
+import './routes/Mapas'
+import './routes/Ubicaciones'
+import './routes/Entidades'
+import './routes/EntidadesMultimedia'
+import './routes/MapasUbicaciones'
+
+
