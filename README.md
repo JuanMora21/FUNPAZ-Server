@@ -39,6 +39,7 @@ Este repositorio contiene el código fuente del servidor de backend para la clí
   `adonis migration:run`
 
 6. Iniciar el servidor:
+
   `adonis serve --dev`
 
 El servidor de backend de la clínica de salud mental FUNPAZ ahora debería estar en funcionamiento.
