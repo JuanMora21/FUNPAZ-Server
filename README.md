@@ -9,7 +9,6 @@ Este repositorio contiene el código fuente del servidor de backend para la clí
 - Gestión de citas: programación, actualización y cancelación de citas.
 - Autenticación de usuarios: inicio de sesión y cierre de sesión de médicos y personal administrativo.
 - Autorización y control de acceso basado en roles: acceso a funciones específicas según el rol del usuario.
-- Historiales médicos: registro y visualización de historiales médicos de pacientes.
 
 ## Requisitos
 
