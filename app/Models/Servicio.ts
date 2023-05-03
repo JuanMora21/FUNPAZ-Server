@@ -12,6 +12,8 @@ enum especialidad {
 }
 
 export default class Servicio extends BaseModel {
+  public static table = 'servicios';
+  
   @column({ isPrimary: true })
   public id: number;
 

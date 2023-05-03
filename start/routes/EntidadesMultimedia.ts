@@ -6,4 +6,4 @@ Route.group(() => {
     Route.get('/EntidadesMultimedias/:id','EntidadesMultimediasController.show');
     Route.put('/EntidadesMultimedias/:id','EntidadesMultimediasController.update');
     Route.delete('/EntidadesMultimedias/:id','EntidadesMultimediasController.destroy');
-})//.middleware(['auth:api','permission'])
+}).middleware(['auth:api','permiso'])

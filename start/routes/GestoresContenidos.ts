@@ -6,4 +6,4 @@ Route.group(() => {
     Route.get('/GestoresContenidos/:id','GestoresContenidosController.show');
     Route.put('/GestoresContenidos/:id','GestoresContenidosController.update');
     Route.delete('/GestoresContenidos/:id','GestoresContenidosController.destroy');
-})//.middleware(['auth:api','permission'])
+}).middleware(['auth:api','permiso'])

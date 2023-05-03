@@ -6,4 +6,4 @@ Route.group(() => {
     Route.get('/Mapas/:id','MapasController.show');
     Route.put('/Mapas/:id','MapasController.update');
     Route.delete('/Mapas/:id','MapasController.destroy');
-})//.middleware(['auth:api','permission'])
+}).middleware(['auth:api','permiso'])

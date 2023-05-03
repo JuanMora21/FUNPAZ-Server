@@ -6,4 +6,4 @@ Route.group(() => {
     Route.get('/Ubicaciones/:id','UbicacionesController.show');
     Route.put('/Ubicaciones/:id','UbicacionesController.update');
     Route.delete('/Ubicaciones/:id','UbicacionesController.destroy');
-})//.middleware(['auth:api','permission'])
+}).middleware(['auth:api','permiso'])

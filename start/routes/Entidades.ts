@@ -6,4 +6,4 @@ Route.group(() => {
     Route.get('/Entidades/:id','EntidadesController.show');
     Route.put('/Entidades/:id','EntidadesController.update');
     Route.delete('/Entidades/:id','EntidadesController.destroy');
-})//.middleware(['auth:api','permission'])
+}).middleware(['auth:api','permiso'])

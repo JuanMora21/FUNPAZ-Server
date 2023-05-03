@@ -29,6 +29,8 @@ enum formato {
 }
 
 export default class Multimedia extends BaseModel {
+  public static table = 'multimedia';
+  
   @column({ isPrimary: true })
   public id: number;
 

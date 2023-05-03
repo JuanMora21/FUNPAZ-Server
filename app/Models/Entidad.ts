@@ -10,6 +10,8 @@ enum tipo {
 }
 
 export default class Entidad extends BaseModel {
+  public static table = 'entidades';
+
   @column({ isPrimary: true })
   public id: number
 

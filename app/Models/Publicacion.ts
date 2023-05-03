@@ -10,6 +10,8 @@ enum categoria {
 }
 
 export default class Publicacion extends BaseModel {
+  public static table = 'publicaciones';
+  
   @column({ isPrimary: true })
   public id: number;
 

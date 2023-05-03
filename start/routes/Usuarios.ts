@@ -6,4 +6,4 @@ Route.group(() => {
     Route.get('/Usuarios/:id','UsuariosController.show');
     Route.put('/Usuarios/:id','UsuariosController.update');
     Route.delete('/Usuarios/:id','UsuariosController.destroy');
-})//.middleware(['auth:api','permission'])
+}).middleware(['auth:api','permiso'])

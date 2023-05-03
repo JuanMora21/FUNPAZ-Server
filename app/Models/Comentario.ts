@@ -4,6 +4,7 @@ import Paciente from './Paciente';
 import Publicacion from './Publicacion';
 
 export default class Comentario extends BaseModel {
+  public static table = 'comentarios';
   @column({ isPrimary: true })
   public id: number;
 

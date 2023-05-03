@@ -12,6 +12,7 @@ enum estado {
 }
 
 export default class Cita extends BaseModel {
+  public static table = 'citas';
   @column({ isPrimary: true })
   public id: number;
 

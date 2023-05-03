@@ -6,4 +6,4 @@ Route.group(() => {
     Route.get('/Citas/:id','CitasController.show');
     Route.put('/Citas/:id','CitasController.update');
     Route.delete('/Citas/:id','CitasController.destroy');
-})//.middleware(['auth:api','permission'])
+}).middleware(['auth:api','permiso'])

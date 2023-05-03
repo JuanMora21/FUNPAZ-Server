@@ -4,6 +4,8 @@ import { DateTime } from 'luxon';
 import Entidad from './Entidad';
 
 export default class Ubicacion extends BaseModel {
+  public static table = 'ubicaciones';
+  
   @column({ isPrimary: true })
   public id: number;
 

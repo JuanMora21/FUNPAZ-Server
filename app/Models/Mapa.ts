@@ -3,6 +3,8 @@ import Ubicacion from './Ubicacion';
 import { DateTime } from 'luxon';
 
 export default class Mapa extends BaseModel {
+  public static table = 'mapas';
+  
   @column({ isPrimary: true })
   public id: number;
 

@@ -6,4 +6,4 @@ Route.group(() => {
     Route.get('/Testimonios/:id','TestimoniosController.show');
     Route.put('/Testimonios/:id','TestimoniosController.update');
     Route.delete('/Testimonios/:id','TestimoniosController.destroy');
-})//.middleware(['auth:api','permission'])
+}).middleware(['auth:api','permiso'])

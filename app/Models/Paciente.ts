@@ -28,6 +28,8 @@ enum estadoCivil {
 }
 
 export default class Paciente extends BaseModel {
+  public static table = 'pacientes';
+  
   @column({ isPrimary: true })
   public numero_identificacion: string;
 

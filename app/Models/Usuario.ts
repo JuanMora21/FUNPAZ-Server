@@ -1,15 +1,12 @@
 import { DateTime } from 'luxon'
-import { BaseModel, ManyToMany, column, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, HasMany, HasOne, ManyToMany, column, hasMany, hasOne, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import Permiso from './Permiso';
-
-enum tipo {
-  Administrador = 'Administrador',
-  GestorContenido = 'Gestor Contenido',
-  Profesional = 'Profesional',
-  Paciente = 'Paciente',
-}
+import Rol from './Rol';
+import ApiToken from './ApiToken';
 
 export default class Usuario extends BaseModel {
+  public static table = 'usuarios';
+  
   @column({ isPrimary: true })
   public id: number
 
@@ -20,7 +17,7 @@ export default class Usuario extends BaseModel {
   public contrasena: string;
 
   @column()
-  public tipo: tipo;
+  public id_rol: number;
 
   @manyToMany(() => Permiso, {
     pivotTable: 'usuarios_permisos',
@@ -28,6 +25,17 @@ export default class Usuario extends BaseModel {
     pivotRelatedForeignKey: 'id_permiso',
   })
   public permisos: ManyToMany<typeof Permiso>;
+
+  @hasOne(()=>Rol,{
+    foreignKey: 'id',
+    localKey: 'id_rol',
+  })
+  public rol: HasOne<typeof Rol>;
+
+  @hasMany(() => ApiToken,{
+    foreignKey: 'id_usuario',
+    })
+  public tokens: HasMany<typeof ApiToken>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

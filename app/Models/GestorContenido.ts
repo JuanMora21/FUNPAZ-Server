@@ -3,6 +3,8 @@ import { DateTime } from 'luxon';
 import Usuario from './Usuario';
 
 export default class GestorContenido extends BaseModel {
+  public static table = 'gestores_contenidos';
+  
   @column({ isPrimary: true })
   public id: number;
 

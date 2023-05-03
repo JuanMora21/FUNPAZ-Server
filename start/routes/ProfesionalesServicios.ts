@@ -6,4 +6,4 @@ Route.group(() => {
     Route.get('/ProfesionalesServicios/:id','ProfesionalesServiciosController.show');
     Route.put('/ProfesionalesServicios/:id','ProfesionalesServiciosController.update');
     Route.delete('/ProfesionalesServicios/:id','ProfesionalesServiciosController.destroy');
-})//.middleware(['auth:api','permission'])
+}).middleware(['auth:api','permiso'])

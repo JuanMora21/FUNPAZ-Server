@@ -23,7 +23,12 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.get('/', async () => {
   return { hello: 'world' }
 })
-
+Route.group(() => {
+  Route.post('/login', 'SeguridadController.login');
+  Route.post('/logout', 'SeguridadController.logout').middleware('auth');
+  Route.post('/forgot-password', 'SeguridadController.forgotPassword');
+  Route.post('/reset-password', 'SeguridadController.resetPassword').middleware('auth');
+});
 
 //Roles del sistema
 import './routes/Administradores'
@@ -32,12 +37,14 @@ import './routes/Profesionales'
 import './routes/Pacientes'
 import './routes/Usuarios'
 import './routes/Permisos'
+import './routes/Roles'
 import './routes/UsuariosPermisos'
 import './routes/ProfesionalesServicios'
 
 
 //Entidades del sistema
 import './routes/Eps'
+import './routes/EpsInfo'
 import './routes/Citas'
 import './routes/Comentarios'
 import './routes/Testimonios'

@@ -8,7 +8,7 @@ export default class extends BaseSchema {
       table.increments('id').primary()
       table.string('correo_electronico').notNullable().unique()
       table.string('contrasena').notNullable()
-      table.enum('tipo', ['Administrador', 'Gestor Contenido', 'Profesional', 'Paciente']).notNullable()
+      table.integer('id_rol').unsigned().references('id').inTable('roles').notNullable()
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */

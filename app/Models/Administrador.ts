@@ -3,6 +3,7 @@ import { DateTime } from 'luxon';
 import Usuario from './Usuario';
 
 export default class Administrador extends BaseModel {
+  public static table = 'administradores';
   @column({ isPrimary: true })
   public id: number;
 

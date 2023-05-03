@@ -6,4 +6,4 @@ Route.group(() => {
     Route.get('/Eps/:id','EpsController.show');
     Route.put('/Eps/:id','EpsController.update');
     Route.delete('/Eps/:id','EpsController.destroy');
-})//.middleware(['auth:api','permission'])
+}).middleware(['auth:api','permiso'])

@@ -6,4 +6,4 @@ Route.group(() => {
     Route.get('/Comentarios/:id','ComentariosController.show');
     Route.put('/Comentarios/:id','ComentariosController.update');
     Route.delete('/Comentarios/:id','ComentariosController.destroy');
-})//.middleware(['auth:api','permission'])
+}).middleware(['auth:api','permiso'])

@@ -11,6 +11,8 @@ enum especialidad {
 }
 
 export default class Profesional extends BaseModel {
+  public static table = 'profesionales';
+  
   @column({ isPrimary: true })
   public id: number;
 
